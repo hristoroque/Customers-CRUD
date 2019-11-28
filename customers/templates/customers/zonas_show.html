@@ -1,0 +1,18 @@
+{% extends "customers/base.html" %}
+{% block body %}
+<h1> Zonas </h1>
+{% if zonas %}
+    {% for zona in zonas %}
+        <div>
+            <h2> {{ zona.nombre }} </h2>
+            <form action="{% url "del_zona" %}" method="post">
+            {% csrf_token %}
+                <input type="hidden" value="{{ zona.id }}" name="id"/>
+                <input type="submit"  value="Eliminar"/>
+            </form>
+        </div>
+    {% endfor %}
+{% else %}
+    <p> No hay Zonas </p>
+{% endif %}
+{% endblock %}

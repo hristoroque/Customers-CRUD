@@ -1,24 +1,24 @@
-{% csrf_token %}
 {% extends "customers/base.html" %}
-{% block body%}
-<form>
+{% block body %}
+<form action="{% url "new" %}" method="post">
+{% csrf_token %}
 <label>Nombre:</label>
-<input type="text"/>
+<input name="nombre" type="text"/>
 <label>RUC:</label>
-<input type="number"/>
+<input name="ruc" type="number"/>
 <label>Tipo:</label>
-<select>
+<select name="tipo_id">
 {% if tipos %}
     {% for tipo in tipos %}
-        <option value="{{ tipo.nombre }}"> {{ tipo.nombre }} </option>
+        <option value="{{ tipo.id }}"> {{ tipo.nombre }} </option>
     {% endfor %}
 {% endif %}
 <select>
 <label>Zona:</label>
-<select>
+<select name="zona_id">
 {% if zonas %}
     {% for zona in zonas %}
-        <option value="{{ zona.nombre }}"> {{ zona.nombre }} </option>
+        <option value="{{ zona.id }}"> {{ zona.nombre }} </option>
     {% endfor %}
 {% endif %}
 </select>
