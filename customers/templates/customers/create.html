@@ -1,5 +1,6 @@
 {% extends "customers/base.html" %}
 {% block body %}
+<h1> Crear Clientes </h1>
 <form action="{% url "new" %}" method="post">
 {% csrf_token %}
 <label>Nombre:</label>
@@ -7,7 +8,7 @@
 <label>RUC:</label>
 <input name="ruc" type="number"/>
 <label>Tipo:</label>
-<select name="tipo_id">
+<select class="input-field col s12" name="tipo_id">
 {% if tipos %}
     {% for tipo in tipos %}
         <option value="{{ tipo.id }}"> {{ tipo.nombre }} </option>
@@ -15,7 +16,7 @@
 {% endif %}
 <select>
 <label>Zona:</label>
-<select name="zona_id">
+<select class="input-field col s12" name="zona_id">
 {% if zonas %}
     {% for zona in zonas %}
         <option value="{{ zona.id }}"> {{ zona.nombre }} </option>
