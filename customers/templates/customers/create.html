@@ -1,0 +1,27 @@
+{% csrf_token %}
+{% extends "customers/base.html" %}
+{% block body%}
+<form>
+<label>Nombre:</label>
+<input type="text"/>
+<label>RUC:</label>
+<input type="number"/>
+<label>Tipo:</label>
+<select>
+{% if tipos %}
+    {% for tipo in tipos %}
+        <option value="{{ tipo.nombre }}"> {{ tipo.nombre }} </option>
+    {% endfor %}
+{% endif %}
+<select>
+<label>Zona:</label>
+<select>
+{% if zonas %}
+    {% for zona in zonas %}
+        <option value="{{ zona.nombre }}"> {{ zona.nombre }} </option>
+    {% endfor %}
+{% endif %}
+</select>
+<input type="submit">
+</form>
+{% endblock %}

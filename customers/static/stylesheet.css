@@ -1,0 +1,41 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+}
+.row {
+    display: flexbox;
+}
+.col-1 {
+    flex-grow: 1;
+}
+.col-2 {
+    flex-grow: 2;
+}
+.header {
+    padding: 10px;
+    background-color: #335bff;
+    color: white;
+}
+.btn {
+    text-align: center;
+    margin: 10px;
+    padding: 10px 0px;
+    font-size: 32px;
+    display: block;
+    text-decoration: none;
+    border-radius: 10px;
+}
+.btn:visited {
+    color: initial;
+    text-decoration: none;
+}
+.btn-main{
+    border: 2px solid white;
+    background-color: #33a2ff;
+}
+.btn-main:hover {
+    border: 2px solid #33a2ff;
+    background-color: white;
+    transition-duration: 1s;
+}

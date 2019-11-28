@@ -1,0 +1,25 @@
+{% extends "customers/base.html" %}
+{% block body%}
+<div class="row header">
+    <h1 class="col-1">
+    Clientes
+    </h1>
+</div>
+<div class="row">
+    <a class="col-1 btn btn-main" href="{% url "new" %}"> crear cliente </a>
+</div>
+<div class="row">
+    <a class="col-1 btn" href="{% url "new_tipo" %}">crear tipo</a>
+</div>
+<div class="row">
+    <a class="col-1 btn" href="{% url "new_zona" %}">crear zona</a>
+</div>
+    <h2> Tipos </h2>
+    {% for tipo in tipos %}
+        <p> {{ tipo.nombre }} </p>
+    {% endfor %}
+    <h2> Zonas </h2>
+    {% for zona in zonas %}
+        <p> {{ zona.nombre }} </p>
+    {% endfor %}
+{% endblock%}

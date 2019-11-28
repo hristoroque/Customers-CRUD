@@ -1,0 +1,9 @@
+{% extends "customers/base.html" %}
+{% block body%}
+<form action="{% url "new_zona" %}" method="post">
+{% csrf_token %}
+<label> Nombre </label>
+<input type="text" name="name"/>
+<input type="submit">
+</form>
+{% endblock %}

@@ -1,0 +1,8 @@
+{
+    "name": "Clientes Sunat",
+    "short_name": "Clientes Sunat",
+    "start_url": "localhost:8000/customers",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "Management"
+  }
