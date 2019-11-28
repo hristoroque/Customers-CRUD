@@ -77,7 +77,12 @@ WSGI_APPLICATION = 'customers_management.wsgi.application'
 
 DATABASES = {
     'default': {
-        dj_database_url.config(conn_max_age=600, ssl_require=True)
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': 'ec2-174-129-253-1.compute-1.amazonaws.com',
+        'NAME': 'd6ooeu7n72rsic',
+        'USER': 'plqciyiirhwhmf',
+        'PORT': '5432',
+        'PASSWORD': '6772f1547dc2bc169f28a5fab627e72ccf0052946893a280919b2a426912d09b',
     }
 }
 
