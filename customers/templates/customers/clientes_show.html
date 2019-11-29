@@ -7,23 +7,40 @@
     <div>
         {% if clientes %}
             {% for cliente in clientes %}
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title"> {{cliente.nombre}} </span> 
-                    <p>RUC: {{ cliente.ruc }} </p>
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title"> {{cliente.nombre}} </span> 
+                        <p>RUC: {{ cliente.ruc }} </p>
+                        <p>Tipo: {{ cliente.tipo.nombre }} </p>
+                        <p>Zona: {{ cliente.zona.nombre }} </p>
+                        <p>Estado:
+                            {% if cliente.estado == 'A' %}
+                                Activo
+                            {% else %}
+                                Inactivo
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <a> EDITAR </a>
+                        <a> INACTIVAR </a>
+                        <a href="#" onclick="document.getElementById('eliminar_{{ cliente.id }}').submit()" >
+                            ELIMINAR
+                        </a>
+                    </div>
                 </div>
-                <div class="card-action">
-                    <a> EDITAR </a>
-                    <a> INACTIVAR </a>
-                    <a> ELIMINAR </a>
-                </div>
-            </div>
+                <form action="{% url 'del' %}" method="post" id="eliminar_{{ cliente.id }}">
+                {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ cliente.id }}">
+                </form>
             {% endfor %}
         {% else %}
             <p> No hay Clientes </p>
         {% endif %}
         <div class="fixed-action-btn">
-            <a class="btn-floating btn-large waves-effect waves-light red"><i class="large material-icons">add</i></a>
+            <a href="{% url 'new' %}" type="submit" class="btn-floating btn-large waves-effect waves-light red">
+                <i class="large material-icons">add</i>
+            </a>
         </div>
     </div>
 </div>

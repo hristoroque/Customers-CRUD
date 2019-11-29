@@ -1,28 +1,47 @@
 {% extends "customers/base.html" %}
 {% block main %}
-<h1> Crear Clientes </h1>
-<form action="{% url "new" %}" method="post">
-{% csrf_token %}
-<label>Nombre:</label>
-<input name="nombre" type="text"/>
-<label>RUC:</label>
-<input name="ruc" type="number"/>
-<label>Tipo:</label>
-<select class="input-field col s12" name="tipo_id">
-{% if tipos %}
-    {% for tipo in tipos %}
-        <option value="{{ tipo.id }}"> {{ tipo.nombre }} </option>
-    {% endfor %}
-{% endif %}
-<select>
-<label>Zona:</label>
-<select class="input-field col s12" name="zona_id">
-{% if zonas %}
-    {% for zona in zonas %}
-        <option value="{{ zona.id }}"> {{ zona.nombre }} </option>
-    {% endfor %}
-{% endif %}
-</select>
-<input type="submit">
-</form>
+<div class="container">
+    <h1> Crear Clientes </h1>
+    <form action="{% url "new" %}" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="input-field col s12">
+            <label for="nombre">Nombre:</label>
+            <input name="nombre" type="text"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <label>RUC:</label>
+            <input name="ruc" type="number"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <select name="tipo_id">
+            <option value="" disabled selected></option>
+            {% if tipos %}
+                {% for tipo in tipos %}
+                    <option value="{{ tipo.id }}"> {{ tipo.nombre }} </option>
+                {% endfor %}
+            {% endif %}
+            </select>
+            <label>Tipo:</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <select name="zona_id">
+            {% if zonas %}
+                {% for zona in zonas %}
+                    <option value="{{ zona.id }}"> {{ zona.nombre }} </option>
+                {% endfor %}
+            {% endif %}
+            </select>
+            <label>Zona:</label>
+        </div>
+    </div>
+    <input type="submit">
+    </form>
+</div>
 {% endblock %}
