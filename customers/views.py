@@ -8,7 +8,8 @@ def index(req):
     return render(req,"customers/index.html")
 
 def show_clientes(req):
-    return render(req,"customers/clientes_show.html")
+    clientes = Cliente.objects.exclude(estado = '*')
+    return render(req,"customers/clientes_show.html",{'clientes': clientes})
 
 def new(req):
     if(req.method == "GET"):
@@ -24,8 +25,15 @@ def new(req):
         cliente.tipo = TipoCliente.objects.get(pk = tipo_id)
         cliente.zona = Zona.objects.get(pk = zona_id )
         cliente.save()
-        return redirect(reverse("index"))
+        return redirect(reverse("clientes"))
 
+def del_cliente(req):
+    if(req.method == "POST"):
+        id = req.POST['id']
+        cliente = Cliente.objects.get(pk = id)
+        cliente.delete()
+        return redirect(reverse("clientes"))
+        
 def new_tipo(req):
     if(req.method == 'GET'):
         return render(req,"customers/create_tipo.html")
