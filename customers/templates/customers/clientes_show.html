@@ -1,0 +1,30 @@
+{% extends "customers/base.html" %}
+{% block main %}
+<div class="container">
+    <h1>
+        Clientes
+    </h1>
+    <div>
+        {% if clientes %}
+            {% for cliente in clientes %}
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title"> {{cliente.nombre}} </span> 
+                    <p>RUC: {{ cliente.ruc }} </p>
+                </div>
+                <div class="card-action">
+                    <a> EDITAR </a>
+                    <a> INACTIVAR </a>
+                    <a> ELIMINAR </a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p> No hay Clientes </p>
+        {% endif %}
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large waves-effect waves-light red"><i class="large material-icons">add</i></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

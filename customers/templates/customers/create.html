@@ -1,5 +1,5 @@
 {% extends "customers/base.html" %}
-{% block body %}
+{% block main %}
 <h1> Crear Clientes </h1>
 <form action="{% url "new" %}" method="post">
 {% csrf_token %}
@@ -25,10 +25,4 @@
 </select>
 <input type="submit">
 </form>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems, options);
-  });
-</script>
 {% endblock %}
