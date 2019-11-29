@@ -1,22 +1,18 @@
 {% extends "customers/base.html" %}
-{% block body%}
-<div class="nav-wrapper">
-    <h1 class="brand-logo">
-    Clientes
-    </h1>
-    <ul class="right hide-on-med-down">
-        <li>Opcione</li>
-    </ul>
-</div>
-<div class="row">
-    <a class="col-1 btn btn-main" href="{% url "new" %}"> crear cliente </a>
-</div>
-<div class="row">
-    <a class="col-1 btn" href="{% url "new_tipo" %}">crear tipo</a>
-</div>
-<div class="row">
-    <a class="col-1 btn" href="{% url "new_zona" %}">crear zona</a>
-</div>
-    <h2><a href="{% url "tipos" %}"> Tipos </a></h2>
-    <h2> <a href="{% url "zonas" %}"> Zonas </a> </h2>
-{% endblock%}
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <h1 class="col s12 center-align">Gestión de Clientes</h1>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+            <a href="{% url 'clientes' %}" class="col s12 btn waves-effect waves-light">Clientes</a>
+        </div>
+        <div class="row">
+            <a href="{% url 'tipos' %}" class="col s12 btn waves-effect waves-light">Tipos de Cliente </a>
+        </div>
+        <div class="row">
+            <a href="{% url 'zonas' %}" class="col s12 btn waves-effect waves-light">Zonas</a>
+        </div>
+    </div>
+{% endblock %}

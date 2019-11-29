@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <head>
     {% load static %}
-    <link rel="stylesheet" href="{% static "stylesheet.css" %}">
-    <link rel="manifest" href="{% static "manifest.webmanifest" %}">
+    <link rel="stylesheet" href="{% static "stylesheet.css" %}"/>
+    <link rel="manifest" href="{% static "manifest.webmanifest" %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-{% block body%}
-{% endblock %}
-<body>
+  {% block main %}{% endblock %}
+  <script>
+    M.AutoInit();
+  </script>
+</body>
