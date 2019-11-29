@@ -7,6 +7,9 @@ from .models import TipoCliente,Zona,Cliente
 def index(req):
     return render(req,"customers/index.html")
 
+def show_clientes(req):
+    return render(req,"customers/clientes_show.html")
+
 def new(req):
     if(req.method == "GET"):
         tipos = TipoCliente.objects.all()
