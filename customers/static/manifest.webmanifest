@@ -4,5 +4,5 @@
     "start_url": "localhost:8000/customers",
     "display": "standalone",
     "background_color": "#fff",
-    "description": "Management"
+    "description": "Management",
   }

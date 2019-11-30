@@ -7,19 +7,19 @@
     <div class="row">
         <div class="input-field col s12">
             <label for="nombre">Nombre:</label>
-            <input name="nombre" type="text"/>
+            <input name="nombre" type="text" required/>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s12">
             <label>RUC:</label>
-            <input name="ruc" type="number"/>
+            <input name="ruc" type="number" required/>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s12">
-            <select name="tipo_id">
-            <option value="" disabled selected></option>
+            <select name="tipo_id" required>
+            <option value="" disabled selected>Escoja un tipo</option>
             {% if tipos %}
                 {% for tipo in tipos %}
                     <option value="{{ tipo.id }}"> {{ tipo.nombre }} </option>
@@ -32,6 +32,7 @@
     <div class="row">
         <div class="input-field col s12">
             <select name="zona_id">
+            <option value="" disabled selected>Escoja una zona</option>
             {% if zonas %}
                 {% for zona in zonas %}
                     <option value="{{ zona.id }}"> {{ zona.nombre }} </option>
@@ -41,7 +42,11 @@
             <label>Zona:</label>
         </div>
     </div>
-    <input type="submit">
+    <div class="row">
+        <div class="col-s12 center-align">
+            <input class="btn-large" type="submit" value="REGISTRAR">
+        </div>
+    </div>
     </form>
 </div>
 {% endblock %}
