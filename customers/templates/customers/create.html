@@ -1,28 +1,52 @@
 {% extends "customers/base.html" %}
 {% block main %}
+<nav>
+    <div class="nav-wrapper">
+        <div class="row">
+            <div class="col s12">
+                <a href="{% url 'clientes' %}" class="breadcrumb">
+                    <span class="flow-text">Clientes</span>
+                </a>
+                <a href="#!" class="breadcrumb">
+                    <span class="flow-text">
+                        Crear Clientes
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
 <div class="container">
-    <h1> Crear Clientes </h1>
-    <form action="{% url "new" %}" method="post">
+    <form action="{% url 'new' %}" method="post">
     {% csrf_token %}
+    <input type="hidden" name="id" value="{{ id|default:"" }}">
     <div class="row">
         <div class="input-field col s12">
             <label for="nombre">Nombre:</label>
-            <input name="nombre" type="text" required/>
+            <input name="nombre" type="text" value="{{ nombre|default:"" }}" required/>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s12">
             <label>RUC:</label>
-            <input name="ruc" type="number" required/>
+            <input name="ruc" type="number" value="{{ ruc | default:"" }}" required/>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s12">
             <select name="tipo_id" required>
-            <option value="" disabled selected>Escoja un tipo</option>
+            {% if tipoget %}
+                <option value="" disabled>Escoja un tipo</option>
+            {% else %}
+                <option value="" disabled selected>Escoja un tipo</option>
+            {% endif %}
             {% if tipos %}
                 {% for tipo in tipos %}
-                    <option value="{{ tipo.id }}"> {{ tipo.nombre }} </option>
+                    <option value="{{ tipo.id }}"
+                    {% if tipoget and tipoget is tipo.nombre %}
+                        selected
+                    {% endif %}
+                    > {{ tipo.nombre }}</option>
                 {% endfor %}
             {% endif %}
             </select>
@@ -32,10 +56,18 @@
     <div class="row">
         <div class="input-field col s12">
             <select name="zona_id">
+            {% if zonaget %}
+                <option value="" disabled>Escoja una zona</option>
+            {% else %}
             <option value="" disabled selected>Escoja una zona</option>
+            {% endif %}
             {% if zonas %}
                 {% for zona in zonas %}
-                    <option value="{{ zona.id }}"> {{ zona.nombre }} </option>
+                    <option value="{{ zona.id }}"
+                    {% if zonaget and zonaget is zona.nombre %}
+                        selected
+                    {% endif %}
+                    > {{ zona.nombre }} </option>
                 {% endfor %}
             {% endif %}
             </select>
@@ -44,7 +76,11 @@
     </div>
     <div class="row">
         <div class="col-s12 center-align">
-            <input class="btn-large" type="submit" value="REGISTRAR">
+            <button class="btn-large" type="submit" value="REGISTRAR">
+                <span class="flow-text">
+                    REGISTRAR
+                </span>
+            </button>
         </div>
     </div>
     </form>

@@ -1,57 +1,89 @@
 {% extends "customers/base.html" %}
 {% block main %}
-<div class="container">
-    <h1>
-        Clientes
-    </h1>
-    <div>
+<nav>
+    <div class="nav-wrapper">
+        <div class="row">
+            <div class="col s12">
+                <a href="{% url 'index' %}" class="breadcrumb">
+                    <span class="flow-text">Menú</span>
+                </a>
+                <a href="#!" class="breadcrumb">
+                    <span class="flow-text">
+                        Clientes
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+    <div class="container">
         {% if clientes %}
             {% for cliente in clientes %}
-                <div class="collection">
-                    <div class="collection-item">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title flow-text"> {{ cliente.nombre }} </span> 
+                        <p class="col s3" >RUC: {{ cliente.ruc }} </p>
+                        <p class="col s3">Tipo: {{ cliente.tipo.nombre }} </p>
+                        <p class="col s3">Zona: {{ cliente.zona.nombre }} </p>
+                        <p class="col s3">Estado:
+                            {% if cliente.estado == 'A' %}
+                                Activo
+                            {% else %}
+                                Inactivo
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="card-action">
                         <div class="row">
-                            <span class="title"> {{ cliente.nombre }} </span> 
-                        </div>
-                        <div class="row">
-                            <p class="col s3" > RUC: {{ cliente.ruc }} </p>
-                            <p class="col s3">Tipo: {{ cliente.tipo.nombre }} </p>
-                            <p class="col s3">Zona: {{ cliente.zona.nombre }} </p>
-                            <p class="col s3">Estado:
-                                {% if cliente.estado == 'A' %}
-                                    Activo
-                                {% else %}
-                                    Inactivo
-                                {% endif %}
-                            </p>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="row valign-wrapper">
-                            <div class="col s2 offset-s6 ">
-                                <a href="{% url "new" %}" >
-                                    EDITAR
-                                </a>
-                            </div>
-                            <form action="{% url "toogle" %}" method="post" class="col s2"> 
+                            <form action="{% url 'new' %}" method="get" class="col s3 center-align flow-text">
+                                <input type="hidden" value="{{ cliente.id }}" name="id">
+                                <input type="hidden" value="{{ cliente.nombre }}" name="nombre">
+                                <input type="hidden" value="{{ cliente.ruc }}" name="ruc">
+                                <input type="hidden" value="{{ cliente.zona.nombre }}" name="zona">
+                                <input type="hidden" value="{{ cliente.tipo.nombre }}" name="tipo">
+                                <button class="btn" type="submit">
+                                    <span class="flow-text">
+                                        EDITAR
+                                    </span>
+                                </button>
+                            </form>
+                            <form action="{% url "toogle" %}" method="post" class="col s3 center-align"> 
                             {% csrf_token %}
                                 <input name="id" type="hidden" value="{{ cliente.id }}" />
                                 {% if cliente.estado == 'A'%}
-                                    <input class="btn-flat" name="option" type="submit" value="INACTIVAR" />
+                                    <button class="btn-flat" name="option" type="submit" value="INACTIVAR">
+                                        <span class="flow-text">
+                                            INACTIVAR
+                                        </span>
+                                    </button>
                                 {% else %}
-                                    <input class="btn-flat" name="option" type="submit" value="ACTIVAR" />
+                                    <button class="btn-flat" name="option" type="submit" value="ACTIVAR">
+                                        <span class="flow-text">
+                                            ACTIVAR
+                                        </span>
+                                    </button>
                                 {% endif %}
                                 </input>
                             </form>
-                            <form action="{% url "del" %}" class="col s2" method="post">
+                            <form action="{% url "del" %}" class="col s3 center-align" method="post">
                             {% csrf_token %}
                                 <input name="id" type="hidden" value="{{ cliente.id }}" />
-                                <input class="btn-flat" type="submit" value="ELIMINAR" />
+                                <button class="btn-flat" type="submit" value="ELIMINAR">
+                                    <span class="flow-text">
+                                        ELIMINAR
+                                    </span>
+                                </button>
                             </form>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         {% else %}
-            <p> No hay Clientes </p>
+        <div class="row">
+            <div class="col-s12 center-align">
+                <p class="flow-text"> No hay Clientes </p>
+            </div>
+        </div>
         {% endif %}
         <div class="fixed-action-btn">
             <a href="{% url 'new' %}" type="submit" class="btn-floating btn-large waves-effect waves-light red">

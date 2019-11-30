@@ -13,13 +13,31 @@ def show_clientes(req):
 
 def new(req):
     if(req.method == "GET"):
+        id=""
+        nombre = ""
+        ruc = ""
+        tipo = None
+        zona = None
+        try:
+            id = req.GET["id"]
+            nombre = req.GET["nombre"]
+            ruc = req.GET["ruc"]
+            tipo = req.GET["tipo"]
+            zona = req.GET["zona"]
+            print(zona)
+        except:
+            print("Edición")
         tipos = TipoCliente.objects.all()
         zonas = Zona.objects.all()
-        return render(req,"customers/create.html",{"zonas": zonas,"tipos": tipos})
+        return render(req,"customers/create.html",{"zonas": zonas,"tipos": tipos, "nombre" : nombre, "ruc": ruc,"tipoget":tipo,"zonaget": zona,"id": id})
     elif (req.method == "POST"):
         tipo_id = req.POST["tipo_id"]
         zona_id = req.POST["zona_id"]
-        cliente = Cliente()
+        id = req.POST["id"]
+        if( id is ""):
+            cliente = Cliente()
+        else:
+            cliente = Cliente.objects.get(pk=id)
         cliente.nombre = req.POST["nombre"]
         cliente.ruc = req.POST["ruc"]
         cliente.tipo = TipoCliente.objects.get(pk = tipo_id)
