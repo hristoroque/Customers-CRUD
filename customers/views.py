@@ -8,7 +8,7 @@ def index(req):
     return render(req,"customers/index.html")
 
 def show_clientes(req):
-    clientes = Cliente.objects.exclude(estado = '*')
+    clientes = Cliente.objects.exclude(estado = "*").order_by('nombre')
     return render(req,"customers/clientes_show.html",{'clientes': clientes})
 
 def new(req):
@@ -34,6 +34,18 @@ def del_cliente(req):
         cliente.delete()
         return redirect(reverse("clientes"))
         
+def toogle_cliente(req):
+    if(req.method=="POST"):
+        id = req.POST['id']
+        option = req.POST['option'] 
+        cliente = Cliente.objects.get(pk = id)
+        if(option == "ACTIVAR"):
+            cliente.estado = 'A'
+        elif(option == "INACTIVAR"):
+            cliente.estado = "I"
+        cliente.save()
+        return redirect(reverse("clientes"))
+
 def new_tipo(req):
     if(req.method == 'GET'):
         return render(req,"customers/create_tipo.html")

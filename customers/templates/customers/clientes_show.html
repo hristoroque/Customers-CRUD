@@ -7,32 +7,48 @@
     <div>
         {% if clientes %}
             {% for cliente in clientes %}
-                <div class="card">
-                    <div class="card-content">
-                        <span class="card-title"> {{cliente.nombre}} </span> 
-                        <p>RUC: {{ cliente.ruc }} </p>
-                        <p>Tipo: {{ cliente.tipo.nombre }} </p>
-                        <p>Zona: {{ cliente.zona.nombre }} </p>
-                        <p>Estado:
-                            {% if cliente.estado == 'A' %}
-                                Activo
-                            {% else %}
-                                Inactivo
-                            {% endif %}
-                        </p>
-                    </div>
-                    <div class="card-action">
-                        <a> EDITAR </a>
-                        <a> INACTIVAR </a>
-                        <a href="#" onclick="document.getElementById('eliminar_{{ cliente.id }}').submit()" >
-                            ELIMINAR
-                        </a>
+                <div class="collection">
+                    <div class="collection-item">
+                        <div class="row">
+                            <span class="title"> {{ cliente.nombre }} </span> 
+                        </div>
+                        <div class="row">
+                            <p class="col s3" > RUC: {{ cliente.ruc }} </p>
+                            <p class="col s3">Tipo: {{ cliente.tipo.nombre }} </p>
+                            <p class="col s3">Zona: {{ cliente.zona.nombre }} </p>
+                            <p class="col s3">Estado:
+                                {% if cliente.estado == 'A' %}
+                                    Activo
+                                {% else %}
+                                    Inactivo
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row valign-wrapper">
+                            <div class="col s2 offset-s6 ">
+                                <a href="{% url "new" %}" >
+                                    EDITAR
+                                </a>
+                            </div>
+                            <form action="{% url "toogle" %}" method="post" class="col s2"> 
+                            {% csrf_token %}
+                                <input name="id" type="hidden" value="{{ cliente.id }}" />
+                                {% if cliente.estado == 'A'%}
+                                    <input class="btn-flat" name="option" type="submit" value="INACTIVAR" />
+                                {% else %}
+                                    <input class="btn-flat" name="option" type="submit" value="ACTIVAR" />
+                                {% endif %}
+                                </input>
+                            </form>
+                            <form action="{% url "del" %}" class="col s2" method="post">
+                            {% csrf_token %}
+                                <input name="id" type="hidden" value="{{ cliente.id }}" />
+                                <input class="btn-flat" type="submit" value="ELIMINAR" />
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <form action="{% url 'del' %}" method="post" id="eliminar_{{ cliente.id }}">
-                {% csrf_token %}
-                    <input type="hidden" name="id" value="{{ cliente.id }}">
-                </form>
             {% endfor %}
         {% else %}
             <p> No hay Clientes </p>
