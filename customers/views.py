@@ -80,7 +80,7 @@ def toogle_cliente(req):
             cliente.estado = "I"
         cliente.save()
         return redirect(reverse("clientes"))
-
+      
 def toogle_tipo(req):
     if(req.method=="POST"):
         id = req.POST['id']
@@ -92,6 +92,25 @@ def toogle_tipo(req):
             tipo.estado = "I"
         tipo.save()
         return redirect(reverse("tipos"))
+
+@csrf_exempt
+def ajax_toggle_cliente(req):
+    id = req.POST["id"]
+    activar = req.POST["option"]
+
+    cliente = Cliente.objects.get(pk=id)
+
+    if(cliente and activar=="INACTIVAR"):
+        cliente.estado = 'I'
+        status = 'I'
+    else:
+        cliente.estado = 'A'
+        status = 'A'
+    cliente.save()
+    data = {
+        "status": status
+    }
+    return JsonResponse(data)
 
 def new_tipo(req):
     if(req.method == 'GET'):
