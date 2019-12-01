@@ -1,18 +1,83 @@
 {% extends "customers/base.html" %}
 {% block main %}
-<h1> Zonas </h1>
-{% if zonas %}
-    {% for zona in zonas %}
-        <div>
-            <h2> {{ zona.nombre }} </h2>
-            <form action="{% url "del_zona" %}" method="post">
-            {% csrf_token %}
-                <input type="hidden" value="{{ zona.id }}" name="id"/>
-                <input type="submit"  value="Eliminar"/>
-            </form>
+<nav>
+    <div class="nav-wrapper">
+        <div class="row">
+            <div class="col s12">
+                <a href="{% url 'index' %}" class="breadcrumb">
+                    <span class="flow-text">Menú</span>
+                </a>
+                <a href="#!" class="breadcrumb">
+                    <span class="flow-text">
+                        Zonas
+                    </span>
+                </a>
+            </div>
         </div>
-    {% endfor %}
-{% else %}
-    <p> No hay Zonas </p>
-{% endif %}
+    </div>
+</nav>
+
+<div class="container">
+    {% if zonas %}
+    {% for zona in zonas %}
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title flow-text"> {{ zona.nombre }} </span> 
+                    <p class="col s3">Estado:
+                        {% if zona.estado == 'A' %}
+                              Activo
+                        {% else %}
+                            Inactivo
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <form action="{% url 'new_zona' %}" method="get" class="col s4 center-align flow-text">
+                            <input type="hidden" value="{{ zona.id }}" name="id">
+                            <input type="hidden" value="{{ zona.nombre }}" name="nombre">
+                            <button class="btn" type="submit">
+                                <span class="flow-text">
+                                    EDITAR
+                               </span>
+                            </button>
+                        </form>
+                        <form action="{% url 'toogle_zona' %}" method="post" class="col s4 center-align"> 
+                           {% csrf_token %}
+                               <input name="id" type="hidden" value="{{ zona.id }}" />
+                               {% if zona.estado == 'A'%}
+                                   <button class="btn-flat" name="option" type="submit" value="INACTIVAR">
+                                          INACTIVAR
+                                 </button>
+                             {% else %}
+                                  <button class="btn-flat" name="option" type="submit" value="ACTIVAR">
+                                         ACTIVAR
+                                 </button>
+                            {% endif %}
+                            </input>
+                        </form>
+                        <form action="{% url 'del_zona' %}" class="col s4 center-align" method="post">
+                        {% csrf_token %}
+                            <input name="id" type="hidden" value="{{ zona.id }}" />
+                            <button class="btn-flat" type="submit" value="ELIMINAR">
+                                    ELIMINAR
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+    <div class="row">
+        <div class="col-s12 center-align">
+            <p class="flow-text"> No hay Zonas </p>
+        </div>
+    </div>
+    {% endif %}
+    <div class="fixed-action-btn">
+        <a href="{% url 'new_zona' %}" class="btn-floating btn-large waves-effect waves-light red">
+             <i class="large material-icons">add</i>
+        </a>
+    </div>
+</div>
 {% endblock %}

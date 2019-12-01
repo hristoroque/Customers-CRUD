@@ -122,7 +122,7 @@ def new_zona(req):
             id = req.GET["id"]
             nombre = req.GET["nombre"]
         except:
-            print(Edición)
+            print("Edición")
         return render(req,"customers/create_zona.html",{"nombre" : nombre, "id" : id})
     elif (req.method == "POST"):
         id = req.POST["id"]
