@@ -13,4 +13,5 @@ urlpatterns = [
     path('zonas/new/',views.new_zona,name='new_zona'),
     path('zonas/del/',views.del_zona,name="del_zona"),
     path('zonas/',views.show_zonas,name="zonas"),
+    path('ajax/clientes/del',views.ajax_del_cliente,name="ajax_del"),
 ]
