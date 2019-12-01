@@ -85,12 +85,12 @@ def toogle_tipo(req):
     if(req.method=="POST"):
         id = req.POST['id']
         option = req.POST['option'] 
-        tipo = Tipo.objects.get(pk = id)
+        tipo = TipoCliente.objects.get(pk = id)
         if(option == "ACTIVAR"):
             tipo.estado = 'A'
         elif(option == "INACTIVAR"):
             tipo.estado = "I"
-        zona.save()
+        tipo.save()
         return redirect(reverse("tipos"))
 
 def new_tipo(req):
