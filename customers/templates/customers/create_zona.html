@@ -1,9 +1,41 @@
 {% extends "customers/base.html" %}
 {% block main %}
-    <form action="{% url "new_zona" %}" method="post">
+<nav>
+    <div class="nav-wrapper">
+        <div class="row">
+            <div class="col s12">
+                <a href="{% url 'tipos' %}" class="breadcrumb">
+                    <span class="flow-text">Tipos</span>
+                </a>
+                <a href="#!" class="breadcrumb">
+                    <span class="flow-text">
+                        Crear Zonas
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <form action="{% url 'new_tipo' %}" method="post">
     {% csrf_token %}
-    <label> Nombre </label>
-    <input type="text" name="name"/>
-    <input type="submit">
+    <input type="hidden" name="id" value="{{ id|default:"" }}">
+    <div class="row">
+        <div class="input-field col s12">
+            <label for="nombre">Nombre:</label>
+            <input name="nombre" type="text" value="{{ nombre|default:"" }}" required/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-s12 center-align">
+            <button class="btn-large" type="submit" value="REGISTRAR">
+                <span class="flow-text">
+                    REGISTRAR
+                </span>
+            </button>
+        </div>
+    </div>
     </form>
+</div>
 {% endblock %}

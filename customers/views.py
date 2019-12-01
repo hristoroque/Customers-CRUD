@@ -102,20 +102,42 @@ def show_tipos(req):
     tipos = TipoCliente.objects.all()
     return render(req,"customers/tipos_show.html",{"tipos": tipos})
 
+def toogle_zona(req):
+    if(req.method=="POST"):
+        id = req.POST['id']
+        option = req.POST['option'] 
+        zona = Zona.objects.get(pk = id)
+        if(option == "ACTIVAR"):
+            zona.estado = 'A'
+        elif(option == "INACTIVAR"):
+            zona.estado = "I"
+        zona.save()
+        return redirect(reverse("zonas"))
+
 def new_zona(req):
     if(req.method == 'GET'):
-        return render(req,"customers/create_zona.html")
+        id = ""
+        nombre = ""
+        try:
+            id = req.GET["id"]
+            nombre = req.GET["nombre"]
+        except:
+            print(Edición)
+        return render(req,"customers/create_zona.html",{"nombre" : nombre, "id" : id})
     elif (req.method == "POST"):
-        name = req.POST['name']
-        zona = models.Zona()
-        zona.nombre = name
+        id = req.POST["id"]
+        if( id is ""):
+            zona = Zona()
+        else:
+            zona = Zona.objects.get(pk=id)
+        zona.nombre = req.POST["nombre"]
         zona.save()
-        return redirect(reverse("index"))
+        return redirect(reverse("zonas"))
 
 def del_zona(req):
-    if(req.method == 'POST'):
+    if(req.method == "POST"):
         id = req.POST['id']
-        zona = Zona.objects.get(id = id)
+        zona = Zona.objects.get(pk = id)
         zona.delete()
         return redirect(reverse("zonas"))
 
