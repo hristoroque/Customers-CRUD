@@ -1,6 +1,22 @@
 {% extends "customers/base.html" %}
 {% block main %}
-    <form action="{% url "new_tipo" %}" method="post">
+<nav>
+    <div class="nav-wrapper">
+        <div class="row">
+            <div class="col s12">
+                <a href="{% url 'tipos' %}" class="breadcrumb">
+                    <span class="flow-text">Tipos</span>
+                </a>
+                <a href="#!" class="breadcrumb">
+                    <span class="flow-text">
+                        Crear Tipos
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+    <form action="{% url 'new_tipo' %}" method="post">
     {% csrf_token %}
     <label> Nombre </label>
     <input name="name" type="text"/>

@@ -81,6 +81,18 @@ def toogle_cliente(req):
         cliente.save()
         return redirect(reverse("clientes"))
 
+def toogle_tipo(req):
+    if(req.method=="POST"):
+        id = req.POST['id']
+        option = req.POST['option'] 
+        tipo = Tipo.objects.get(pk = id)
+        if(option == "ACTIVAR"):
+            tipo.estado = 'A'
+        elif(option == "INACTIVAR"):
+            tipo.estado = "I"
+        zona.save()
+        return redirect(reverse("tipos"))
+
 def new_tipo(req):
     if(req.method == 'GET'):
         return render(req,"customers/create_tipo.html")
@@ -89,7 +101,7 @@ def new_tipo(req):
         tipo = models.TipoCliente()
         tipo.nombre = name
         tipo.save()
-        return redirect(reverse("index"))
+        return redirect(reverse("tipos"))
 
 def del_tipo(req):
     if(req.method == "POST"):
