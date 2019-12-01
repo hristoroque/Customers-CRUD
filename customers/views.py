@@ -80,6 +80,18 @@ def toogle_cliente(req):
             cliente.estado = "I"
         cliente.save()
         return redirect(reverse("clientes"))
+      
+def toogle_tipo(req):
+    if(req.method=="POST"):
+        id = req.POST['id']
+        option = req.POST['option'] 
+        tipo = TipoCliente.objects.get(pk = id)
+        if(option == "ACTIVAR"):
+            tipo.estado = 'A'
+        elif(option == "INACTIVAR"):
+            tipo.estado = "I"
+        tipo.save()
+        return redirect(reverse("tipos"))
 
 @csrf_exempt
 def ajax_toggle_cliente(req):
@@ -100,16 +112,25 @@ def ajax_toggle_cliente(req):
     }
     return JsonResponse(data)
 
-
 def new_tipo(req):
     if(req.method == 'GET'):
-        return render(req,"customers/create_tipo.html")
+        id = ""
+        nombre = ""
+        try:
+            id = req.GET["id"]
+            nombre = req.GET["nombre"]
+        except:
+            print("Edición")
+        return render(req,"customers/create_tipo.html",{"nombre" : nombre, "id" : id})
     elif (req.method == "POST"):
-        name = req.POST['name']
-        tipo = models.TipoCliente()
-        tipo.nombre = name
+        id = req.POST["id"]
+        if( id is ""):
+            tipo = TipoCliente()
+        else:
+            tipo = TipoCliente.objects.get(pk=id)
+        tipo.nombre = req.POST["nombre"]
         tipo.save()
-        return redirect(reverse("index"))
+        return redirect(reverse("tipos"))
 
 def del_tipo(req):
     if(req.method == "POST"):

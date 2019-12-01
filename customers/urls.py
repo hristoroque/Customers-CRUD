@@ -7,6 +7,7 @@ urlpatterns = [
     path('new/',views.new,name='new'),
     path('clientes/del',views.del_cliente,name="del"),
     path('clientes/state',views.toogle_cliente,name="toogle"),
+    path('tipos/state',views.toogle_tipo,name="toogle_tipo"),
     path('tipos/new/',views.new_tipo,name='new_tipo'),
     path('tipos/del',views.del_tipo,name="del_tipo"),
     path('tipos/',views.show_tipos,name='tipos'),
