@@ -11,7 +11,11 @@
 <body>
   {% block main %}
   {% endblock %}
+  <script src="{% static "scripts/jquery-3.4.1.min.js" %}">
+  </script>
   <script>
     M.AutoInit();
   </script>
+  {% block javascript %}
+  {% endblock %}
 </body>

@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect,reverse
 from django.http import HttpResponse
 from . import models
 from .models import TipoCliente,Zona,Cliente
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def index(req):
@@ -51,7 +53,22 @@ def del_cliente(req):
         cliente = Cliente.objects.get(pk = id)
         cliente.delete()
         return redirect(reverse("clientes"))
-        
+
+@csrf_exempt
+def ajax_del_cliente(req):
+    id = req.POST['id']
+    cliente = Cliente.objects.get(pk = id)
+    if(cliente is not None):
+        cliente.delete()
+        data = {
+            'is_deleted': True
+        }
+    else:
+        data = {
+            'is_deleted': False
+        }
+    return JsonResponse(data)
+
 def toogle_cliente(req):
     if(req.method=="POST"):
         id = req.POST['id']
