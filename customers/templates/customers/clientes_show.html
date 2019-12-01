@@ -103,11 +103,11 @@ $( ".activar" ).on("submit", function(event){
         success: function(data){
             if(data.status == "A"){
                 $('#status-'+id).html("Estado: Activo")
-                option.html("INACTIVAR")
+                option.text("INACTIVAR")
                 M.toast({html: 'El estado del cliente se cambió a activo'})
             } else {
                 $('#status-'+id).html("Estado: Inactivo")
-                option.html("ACTIVAR")
+                option.text("ACTIVAR")
                 M.toast({html: 'El estado del cliente se cambió a inactivo'})
             }
         },

@@ -33,7 +33,7 @@
                 </div>
                 <div class="card-action">
                     <div class="row">
-                        <form action="{% url 'new_tipo' %}" method="get" class="col s3 center-align flow-text">
+                        <form action="{% url 'new_tipo' %}" method="get" class="col s4 center-align flow-text">
                             <input type="hidden" value="{{ tipo.id }}" name="id">
                             <input type="hidden" value="{{ tipo.nombre }}" name="nombre">
                             <button class="btn" type="submit">
@@ -42,31 +42,25 @@
                                </span>
                             </button>
                         </form>
-                        <form action="{% url 'toogle_tipo' %}" method="post" class="col s3 center-align"> 
+                        <form action="{% url 'toogle_tipo' %}" method="post" class="col s4 center-align"> 
                            {% csrf_token %}
                                <input name="id" type="hidden" value="{{ tipo.id }}" />
                                {% if tipo.estado == 'A'%}
                                    <button class="btn-flat" name="option" type="submit" value="INACTIVAR">
-                                       <span class="flow-text">
                                           INACTIVAR
-                                    </span>
                                  </button>
                              {% else %}
                                   <button class="btn-flat" name="option" type="submit" value="ACTIVAR">
-                                     <span class="flow-text">
                                          ACTIVAR
-                                      </span>
                                  </button>
                             {% endif %}
                             </input>
                         </form>
-                        <form action="{% url 'del_tipo' %}" class="col s3 center-align" method="post">
+                        <form action="{% url 'del_tipo' %}" class="col s4 center-align" method="post">
                         {% csrf_token %}
                             <input name="id" type="hidden" value="{{ tipo.id }}" />
                             <button class="btn-flat" type="submit" value="ELIMINAR">
-                                <span class="flow-text">
                                     ELIMINAR
-                                </span>
                             </button>
                         </form>
                     </div>
@@ -81,7 +75,7 @@
     </div>
     {% endif %}
     <div class="fixed-action-btn">
-        <a href="{% url 'new_tipo' %}" type="submit" class="btn-floating btn-large waves-effect waves-light red">
+        <a href="{% url 'new_tipo' %}" class="btn-floating btn-large waves-effect waves-light red">
              <i class="large material-icons">add</i>
         </a>
     </div>
