@@ -35,7 +35,7 @@
                     </div>
                     <div class="card-action">
                         <div class="row">
-                            <form action="{% url 'new' %}" method="get" class="col s3 center-align flow-text">
+                            <form action="{% url 'new' %}" method="get" class="col s4 center-align flow-text">
                                 <input type="hidden" value="{{ cliente.id }}" name="id">
                                 <input type="hidden" value="{{ cliente.nombre }}" name="nombre">
                                 <input type="hidden" value="{{ cliente.ruc }}" name="ruc">
@@ -45,7 +45,7 @@
                                         EDITAR
                                 </button>
                             </form>
-                            <form action="{% url "toogle" %}" method="post" class="col s3 center-align"> 
+                            <form action="{% url "toogle" %}" method="post" class="col s4 center-align"> 
                             {% csrf_token %}
                                 <input name="id" type="hidden" value="{{ cliente.id }}" />
                                 {% if cliente.estado == 'A'%}
@@ -59,7 +59,7 @@
                                 {% endif %}
                                 </input>
                             </form>
-                            <form action="{% url "del" %}" class="col s3 center-align" method="post">
+                            <form action="{% url "del" %}" class="col s4 center-align" method="post">
                             {% csrf_token %}
                                 <input name="id" type="hidden" value="{{ cliente.id }}" />
                                 <button class="btn-flat" type="submit" value="ELIMINAR">
