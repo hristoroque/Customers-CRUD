@@ -42,9 +42,7 @@
                                 <input type="hidden" value="{{ cliente.zona.nombre }}" name="zona">
                                 <input type="hidden" value="{{ cliente.tipo.nombre }}" name="tipo">
                                 <button class="btn" type="submit">
-                                    <span class="flow-text">
                                         EDITAR
-                                    </span>
                                 </button>
                             </form>
                             <form action="{% url "toogle" %}" method="post" class="col s3 center-align"> 
@@ -52,15 +50,11 @@
                                 <input name="id" type="hidden" value="{{ cliente.id }}" />
                                 {% if cliente.estado == 'A'%}
                                     <button class="btn-flat" name="option" type="submit" value="INACTIVAR">
-                                        <span class="flow-text">
                                             INACTIVAR
-                                        </span>
                                     </button>
                                 {% else %}
                                     <button class="btn-flat" name="option" type="submit" value="ACTIVAR">
-                                        <span class="flow-text">
                                             ACTIVAR
-                                        </span>
                                     </button>
                                 {% endif %}
                                 </input>
@@ -69,9 +63,7 @@
                             {% csrf_token %}
                                 <input name="id" type="hidden" value="{{ cliente.id }}" />
                                 <button class="btn-flat" type="submit" value="ELIMINAR">
-                                    <span class="flow-text">
-                                        ELIMINAR
-                                    </span>
+                                    ELIMINAR
                                 </button>
                             </form>
                         </div>
@@ -85,11 +77,12 @@
             </div>
         </div>
         {% endif %}
+        
         <div class="fixed-action-btn">
-            <a href="{% url 'new' %}" type="submit" class="btn-floating btn-large waves-effect waves-light red">
+            <a href="{% url 'new' %}"  class="btn-floating btn-large red">
                 <i class="large material-icons">add</i>
             </a>
-        </div>
+        </div>      
     </div>
 </div>
 {% endblock %}
