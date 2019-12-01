@@ -95,11 +95,21 @@ def toogle_tipo(req):
 
 def new_tipo(req):
     if(req.method == 'GET'):
-        return render(req,"customers/create_tipo.html")
+        id = ""
+        nombre = ""
+        try:
+            id = req.GET["id"]
+            nombre = req.GET["nombre"]
+        except:
+            print("Edición")
+        return render(req,"customers/create_tipo.html",{"nombre" : nombre, "id" : id})
     elif (req.method == "POST"):
-        name = req.POST['name']
-        tipo = models.TipoCliente()
-        tipo.nombre = name
+        id = req.POST["id"]
+        if( id is ""):
+            tipo = TipoCliente()
+        else:
+            tipo = TipoCliente.objects.get(pk=id)
+        tipo.nombre = req.POST["nombre"]
         tipo.save()
         return redirect(reverse("tipos"))
 
