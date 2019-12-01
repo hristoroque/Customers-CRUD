@@ -14,4 +14,5 @@ urlpatterns = [
     path('zonas/del/',views.del_zona,name="del_zona"),
     path('zonas/',views.show_zonas,name="zonas"),
     path('ajax/clientes/del',views.ajax_del_cliente,name="ajax_del"),
+    path('ajax/toggle/cliente',views.ajax_toggle_cliente,name="ajax_toggle")
 ]

@@ -25,7 +25,7 @@
                         <p class="col s3" >RUC: {{ cliente.ruc }} </p>
                         <p class="col s3">Tipo: {{ cliente.tipo.nombre }} </p>
                         <p class="col s3">Zona: {{ cliente.zona.nombre }} </p>
-                        <p class="col s3">Estado:
+                        <p id="status-{{ cliente.id }}" class="col s3">Estado:
                             {% if cliente.estado == 'A' %}
                                 Activo
                             {% else %}
@@ -45,7 +45,7 @@
                                         EDITAR
                                 </button>
                             </form>
-                            <form action="{% url "toogle" %}" method="post" class="col s4 center-align"> 
+                            <form method="post" class="activar col s4 center-align"> 
                             {% csrf_token %}
                                 <input name="id" type="hidden" value="{{ cliente.id }}" />
                                 {% if cliente.estado == 'A'%}
@@ -88,6 +88,32 @@
 {% endblock %}
 {% block javascript %}
 <script>
+$( ".activar" ).on("submit", function(event){
+    event.preventDefault();
+    var id = $(this).find("input[name='id']").val()
+    var option = $(this).find("button[name='option']")
+    var cardid = "card-"+id
+    carElement = $("#"+cardid)
+    $.ajax({
+        url: '/customers/ajax/toggle/cliente',
+        data: {
+            'id': id,
+            'option': option.html()
+        },
+        success: function(data){
+            if(data.status == "A"){
+                $('#status-'+id).html("Estado: Activo")
+                option.html("INACTIVAR")
+                M.toast({html: 'El estado del cliente se cambió a activo'})
+            } else {
+                $('#status-'+id).html("Estado: Inactivo")
+                option.html("ACTIVAR")
+                M.toast({html: 'El estado del cliente se cambió a inactivo'})
+            }
+        },
+        method: 'POST'
+    });
+});
 $( ".eliminar" ).on( "submit", function( event ) {
     event.preventDefault();
     var id = $(this).find("input[name='id']").val()
