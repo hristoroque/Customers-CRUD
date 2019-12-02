@@ -51,7 +51,9 @@ def del_cliente(req):
     if(req.method == "POST"):
         id = req.POST['id']
         cliente = Cliente.objects.get(pk = id)
-        cliente.delete()
+        cliente.estado = "*"
+        cliente.save()
+        # cliente.delete()
         return redirect(reverse("clientes"))
 
 @csrf_exempt
@@ -59,7 +61,9 @@ def ajax_del_cliente(req):
     id = req.POST['id']
     cliente = Cliente.objects.get(pk = id)
     if(cliente is not None):
-        cliente.delete()
+        cliente.estado = "*"
+        cliente.save()
+        # cliente.delete()
         data = {
             'is_deleted': True
         }
@@ -136,11 +140,14 @@ def del_tipo(req):
     if(req.method == "POST"):
         id = req.POST['id']
         tipo = TipoCliente.objects.get(pk = id)
-        tipo.delete()
+        tipo.estado = "*"
+        tipo.save()
+        # tipo.delete()
         return redirect(reverse("tipos"))
 
 def show_tipos(req):
-    tipos = TipoCliente.objects.all()
+    # tipos = TipoCliente.objects.all()
+    tipos = TipoCliente.objects.exclude(estado = "*").order_by('nombre')
     return render(req,"customers/tipos_show.html",{"tipos": tipos})
 
 def toogle_zona(req):
@@ -179,9 +186,12 @@ def del_zona(req):
     if(req.method == "POST"):
         id = req.POST['id']
         zona = Zona.objects.get(pk = id)
-        zona.delete()
+        zona.estado = "*"
+        zona.save()
+        # zona.delete()
         return redirect(reverse("zonas"))
 
 def show_zonas(req):
-    zonas = Zona.objects.all()
+    # zonas = Zona.objects.all()
+    zomas = Zona.objects.exclude(estado = "*").order_by('nombre')
     return render(req,"customers/zonas_show.html",{"zonas": zonas})
