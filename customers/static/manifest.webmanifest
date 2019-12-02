@@ -1,21 +1,21 @@
 {
-    "name": "Clientes Sunat",
-    "short_name": "Clientes Sunat",
+    "name": "Mis Clientes",
+    "short_name": "Mis Clientes",
     "start_url": "localhost:8000/customers",
     "display": "standalone",
     "background_color": "#fff",
     "description": "Management",
     "icons": [{
-	    "src": "images/launcher-icon-48x48.png",
-	    "type": "image/png",
-	    "sizes": "48x48"
+        "src": "images/launcher-icon-48x48.png",
+        "type": "image/png",
+        "sizes": "48x48"
     },{
-	    "src": "images/launcher-icon-96x96.png",
-	    "type": "image/png",
-	    "sizes": "96x96"
+        "src": "images/launcher-icon-96x96.png",
+        "type": "image/png",
+        "sizes": "96x96"
     },{
-	    "src": "images/launcher-icon-192x192.png",
-	    "type": "image/png",
-	    "sizes": "192x192"
-    }]
+        "src": "images/launcher-icon-192x192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+    }]  
 }
