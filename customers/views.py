@@ -193,5 +193,5 @@ def del_zona(req):
 
 def show_zonas(req):
     # zonas = Zona.objects.all()
-    zomas = Zona.objects.exclude(estado = "*").order_by('nombre')
+    zonas = Zona.objects.exclude(estado = "*").order_by('nombre')
     return render(req,"customers/zonas_show.html",{"zonas": zonas})
