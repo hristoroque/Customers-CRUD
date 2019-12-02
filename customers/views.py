@@ -29,8 +29,10 @@ def new(req):
             print(zona)
         except:
             print("Edición")
-        tipos = TipoCliente.objects.all()
-        zonas = Zona.objects.all()
+        # tipos = TipoCliente.objects.all()
+        tipos = TipoCliente.objects.exclude(estado = "*").order_by('nombre')
+        # zonas = Zona.objects.all()
+        zonas = Zona.objects.exclude(estado = "*").order_by('nombre')
         return render(req,"customers/create.html",{"zonas": zonas,"tipos": tipos, "nombre" : nombre, "ruc": ruc,"tipoget":tipo,"zonaget": zona,"id": id})
     elif (req.method == "POST"):
         tipo_id = req.POST["tipo_id"]
@@ -140,6 +142,9 @@ def del_tipo(req):
     if(req.method == "POST"):
         id = req.POST['id']
         tipo = TipoCliente.objects.get(pk = id)
+        # cliente_update = Cliente.objects.get(tipo = tipo)
+        # cliente_update.estado = "I"
+        # cliente_update.save()
         tipo.estado = "*"
         tipo.save()
         # tipo.delete()
