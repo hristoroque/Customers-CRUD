@@ -86,7 +86,12 @@ def toogle_cliente(req):
             cliente.estado = "I"
         cliente.save()
         return redirect(reverse("clientes"))
-      
+
+def search_cliente(req):
+    cliente_nombre = req.GET.get("word","")
+    clientes = Cliente.objects.exclude(estado = "*").filter(nombre__contains = cliente_nombre).order_by('nombre')
+    return render(req,"customers/clientes_show.html",{'clientes': clientes,'search': True})
+
 def toogle_tipo(req):
     if(req.method=="POST"):
         id = req.POST['id']

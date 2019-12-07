@@ -2,20 +2,46 @@
 {% block main %}
 <nav>
     <div class="nav-wrapper">
-        <div class="row">
-            <div class="col s12">
-                <a href="{% url 'index' %}" class="breadcrumb">
-                    <span class="flow-text">Menú</span>
-                </a>
-                <a href="#!" class="breadcrumb">
-                    <span class="flow-text">
-                        Clientes
-                    </span>
-                </a>
+        <a href="#" class="brand-logo center">
+            {% if search %}
+                Clientes Encontrados
+            {% else %}
+                Clientes
+            {% endif %}
+        </a>
+        <a href="#" data-target="sidenav-cliente" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href=".."><i class="material-icons">arrow_back</i></a></li>
+        <li>
+            <div class="nav-wrapper">
+            <form id="search-form" action="{% url 'search_cliente' %}" method="GET" %}">
+                <div class="input-field">
+                    <input name="word" id="word" type="search" required placeholder="search customer">
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
             </div>
-        </div>
+        </li>
+        </ul>
     </div>
-</nav>
+</nav>    
+<ul class="sidenav" id="sidenav-cliente">
+    <li>
+    <nav>
+        <div class="nav-wrapper">
+        <form id="search-form" action="{% url 'search_cliente' %}" method="GET" %}">
+            <div class="input-field">
+                <input name="word" id="word" type="search" required placeholder="search customer">
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+            </div>
+        </form>
+        </div>
+    </nav>
+    </li>
+    <li><a href=".."><i class="material-icons">arrow_back</i>Volver</a></li>
+</ul>
     <div class="container">
         {% if clientes %}
             {% for cliente in clientes %}
@@ -45,7 +71,7 @@
                                         EDITAR
                                 </button>
                             </form>
-                            <form method="post" class="activar col s4 center-align"> 
+                            <form class="activar col s4 center-align"> 
                             {% csrf_token %}
                                 <input name="id" type="hidden" value="{{ cliente.id }}" />
                                 {% if cliente.estado == 'A'%}
@@ -77,12 +103,19 @@
             </div>
         </div>
         {% endif %}
-        
-        <div class="fixed-action-btn">
-            <a href="{% url 'new' %}"  class="btn-floating btn-large red">
-                <i class="large material-icons">add</i>
-            </a>
-        </div>      
+        {% if search %}
+            <div class="row">
+                <div class="col s12 center-align">
+                    <a href="{% url 'clientes' %}" class="waves-effect waves-light btn"> Ver todos los Clientes </a>
+                </div>
+            </div>
+        {% else %}
+            <div class="fixed-action-btn">
+                <a href="{% url 'new' %}"  class="btn-floating btn-large red">
+                    <i class="large material-icons">add</i>
+                </a>
+            </div>
+        {% endif %}
     </div>
 </div>
 {% load static %}

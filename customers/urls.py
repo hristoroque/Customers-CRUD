@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
     path('',views.index,name='index'),
     path('clientes/',views.show_clientes,name="clientes"),
+    #path('clientes/created',views.show_clientes,name="clientescreated",kwargs={'action':'created'}),
+    #path('clientes/modified',views.show_clientes,name="clientesmodified",kwargs={'action':'modified'}),
     path('new/',views.new,name='new'),
     path('clientes/del',views.del_cliente,name="del"),
     path('clientes/state',views.toogle_cliente,name="toogle"),
@@ -16,5 +18,6 @@ urlpatterns = [
     path('zonas/del/',views.del_zona,name="del_zona"),
     path('zonas/',views.show_zonas,name="zonas"),
     path('ajax/clientes/del',views.ajax_del_cliente,name="ajax_del"),
-    path('ajax/toggle/cliente',views.ajax_toggle_cliente,name="ajax_toggle")
+    path('ajax/toggle/cliente',views.ajax_toggle_cliente,name="ajax_toggle"),
+    path('clientes/search',views.search_cliente,name="search_cliente"),
 ]

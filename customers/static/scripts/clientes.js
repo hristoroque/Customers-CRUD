@@ -1,5 +1,5 @@
 $( ".activar" ).on("submit", function(event){
-    event.preventDefault();
+    event.preventDefault()
     var id = $(this).find("input[name='id']").val()
     var option = $(this).find("button[name='option']")
     console.log(option.val())
