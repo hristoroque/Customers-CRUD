@@ -3,7 +3,7 @@ from django.db import models
 class TipoCliente(models.Model):
     nombre = models.CharField(max_length = 60)
     estado = models.CharField(max_length = 1, default = 'A')
-
+    
 class Zona(models.Model):
     nombre = models.CharField(max_length = 60)
     estado = models.CharField(max_length = 1, default = 'A')

@@ -4,6 +4,7 @@ from . import models
 from .models import TipoCliente,Zona,Cliente
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
 
 # Create your views here.
 def index(req):
@@ -245,3 +246,17 @@ def search_zonas(req):
     word = req.GET.get("word")
     zonas = Zona.objects.exclude(estado = "*").filter(nombre__icontains = word).order_by('nombre')
     return render(req,"customers/zonas_show.html",{"zonas": zonas,"search": True})
+
+@csrf_exempt
+def ajax_search_cliente(req):
+    word = req.GET.get("word","")
+    clientes = Cliente.objects.exclude(estado = "*").filter(nombre__istartswith = word).select_related('zona','tipo')
+    data = {}
+    for cliente in clientes:
+        data[cliente.id] = {
+            "nombre": cliente.nombre,
+            "ruc": cliente.ruc,
+            "zona": cliente.zona.nombre,
+            "tipo": cliente.tipo.nombre
+         }
+    return JsonResponse(data)
