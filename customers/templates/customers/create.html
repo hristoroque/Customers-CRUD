@@ -29,7 +29,7 @@
     <div class="row">
         <div class="input-field col s12">
             <label>RUC:</label>
-            <input name="ruc" type="number" value="{{ ruc | default:"" }}" min="10000000000" max="99999999999" required/>
+            <input id="rucfield" name="ruc" type="number" value="{{ ruc | default:"" }}" class="validate" data-length="11" required/>
         </div>
     </div>
     <div class="row">
@@ -85,4 +85,8 @@
     </div>
     </form>
 </div>
+{% endblock %}
+{% block javascript %}
+<script>
+</script>
 {% endblock %}

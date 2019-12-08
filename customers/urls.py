@@ -21,4 +21,7 @@ urlpatterns = [
     path('ajax/toggle/cliente',views.ajax_toggle_cliente,name="ajax_toggle"),
     path('clientes/search',views.search_cliente,name="search_cliente"),
     path('tipos/search',views.search_tipos,name="search_tipos"),
+    path('zonas/search',views.search_zonas,name="search_zonas"),
+    path('ajax/zonas/del',views.ajax_del_zona,name="ajax_del_zona"),
+    path('ajax/tipos/del',views.ajax_del_tipo,name="ajax_del_tipo"),
 ]

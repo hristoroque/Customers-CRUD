@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('.modal').modal();
-  });
+});
 
 $( ".activar" ).on("submit", function(event){
     event.preventDefault()

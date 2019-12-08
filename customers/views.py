@@ -65,7 +65,37 @@ def ajax_del_cliente(req):
     if(cliente is not None):
         cliente.estado = "*"
         cliente.save()
-        # cliente.delete()
+        data = {
+            'is_deleted': True
+        }
+    else:
+        data = {
+            'is_deleted': False
+        }
+    return JsonResponse(data)
+@csrf_exempt
+def ajax_del_zona(req):
+    id = req.POST['id']
+    zona = Zona.objects.get(pk = id)
+    if(zona is not None):
+        zona.estado = "*"
+        zona.save()
+        data = {
+            'is_deleted': True
+        }
+    else:
+        data = {
+            'is_deleted': False
+        }
+    return JsonResponse(data)
+
+@csrf_exempt
+def ajax_del_tipo(req):
+    id = req.POST['id']
+    tipo = TipoCliente.objects.get(pk = id)
+    if(tipo is not None):
+        tipo.estado = "*"
+        tipo.save()
         data = {
             'is_deleted': True
         }
@@ -89,7 +119,7 @@ def toogle_cliente(req):
 
 def search_cliente(req):
     cliente_nombre = req.GET.get("word","")
-    clientes = Cliente.objects.exclude(estado = "*").filter(nombre__contains = cliente_nombre).order_by('nombre')
+    clientes = Cliente.objects.exclude(estado = "*").filter(nombre__icontains = cliente_nombre).order_by('nombre')
     return render(req,"customers/clientes_show.html",{'clientes': clientes,'search': True})
 
 def toogle_tipo(req):
@@ -162,8 +192,8 @@ def show_tipos(req):
 
 def search_tipos(req):
     word = req.GET.get("word","")
-    tipos = TipoCliente.objects.exclude(estado = "*").filter(nombre__contains = word).order_by('nombre')
-    return render(req,"customers/tipos_show.html",{"tipos": tipos})
+    tipos = TipoCliente.objects.exclude(estado = "*").filter(nombre__icontains = word).order_by('nombre')
+    return render(req,"customers/tipos_show.html",{"tipos": tipos,"search": True})
 
 def toogle_zona(req):
     if(req.method=="POST"):
@@ -212,5 +242,6 @@ def show_zonas(req):
     return render(req,"customers/zonas_show.html",{"zonas": zonas})
 
 def search_zonas(req):
-    zonas = Zona.objects.exclude(estado = "*").order_by('nombre')
-    return render(req,"customers/zonas_show.html",{"zonas": zonas})
+    word = req.GET.get("word")
+    zonas = Zona.objects.exclude(estado = "*").filter(nombre__icontains = word).order_by('nombre')
+    return render(req,"customers/zonas_show.html",{"zonas": zonas,"search": True})

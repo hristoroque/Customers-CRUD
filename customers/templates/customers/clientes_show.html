@@ -9,21 +9,13 @@
                 Clientes
             {% endif %}
         </a>
-        <a href="#" data-target="sidenav-cliente" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a href=".."><i class="material-icons">arrow_back</i></a></li>
-        <li>
-            <div class="nav-wrapper">
-            <form id="search-form" action="{% url 'search_cliente' %}" method="GET" %}">
-                <div class="input-field">
-                    <input name="word" id="word" type="search" required placeholder="search customer">
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
-                </div>
-            </form>
+        <form id="search-form" action="{% url 'search_cliente' %}" method="GET" %}">
+            <div class="input-field">
+                <input name="word" id="word" type="search">
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
             </div>
-        </li>
-        </ul>
+        </form>
     </div>
 </nav>    
 <ul class="sidenav" id="sidenav-cliente">
@@ -121,7 +113,7 @@
 
 <!-- Ventanas de confirmación para eliminar cliente -->
 <div id="clienteConf" class="modal">
-    <div class="modal-content">
+    <div class="modal-content center-align">
         <h4>¿Quiere eliminar el cliente?</h4>
         <p></p>
     </div>

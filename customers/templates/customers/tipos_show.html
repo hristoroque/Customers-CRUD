@@ -18,12 +18,11 @@
             </form>
     </div>
 </nav>    
-    <ul class="sidenav" id="sidenav-cliente">
-        <li> Ottras Cosas
-        </li>
-        <li><a href=".."><i class="material-icons">arrow_back</i>Volver</a></li>
-    </ul>
-
+<ul class="sidenav" id="sidenav-cliente">
+    <li> Ottras Cosas
+    </li>
+    <li><a href=".."><i class="material-icons">arrow_back</i>Volver</a></li>
+</ul>
 <div class="container">
     {% if tipos %}
     {% for tipo in tipos %}
@@ -81,10 +80,18 @@
         </div>
     </div>
     {% endif %}
+    {% if search %}
+        <div class="row">
+            <div class="col s12 center-align">
+                <a href="{% url 'tipos' %}" class="waves-effect waves-light btn"> Ver todos los tipos </a>
+            </div>
+        </div>
+    {% else %}
     <div class="fixed-action-btn">
         <a href="{% url 'new_tipo' %}" class="btn-floating btn-large waves-effect waves-light red">
              <i class="large material-icons">add</i>
         </a>
     </div>
+    {% endif %}
 </div>
 {% endblock %}

@@ -2,25 +2,30 @@
 {% block main %}
 <nav>
     <div class="nav-wrapper">
-        <div class="row">
-            <div class="col s12">
-                <a href="{% url 'index' %}" class="breadcrumb">
-                    <span class="flow-text">Menú</span>
-                </a>
-                <a href="#!" class="breadcrumb">
-                    <span class="flow-text">
-                        Zonas
-                    </span>
-                </a>
-            </div>
-        </div>
+        <a href="#" class="brand-logo center">
+            {% if search %}
+                Zonas Encontradas
+            {% else %}
+                Zonas
+            {% endif %}
+        </a>
+            <form id="search-form" action="{% url 'search_zonas' %}" method="GET" %}">
+                <div class="input-field">
+                    <input name="word" id="word" type="search" required>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
     </div>
-</nav>
-
+</nav>    
+<ul class="sidenav" id="sidenav-cliente">
+    <li> Ottras Cosas </li>
+    <li><a href=".."><i class="material-icons">arrow_back</i>Volver</a></li>
+</ul>
 <div class="container">
     {% if zonas %}
     {% for zona in zonas %}
-            <div class="card">
+            <div id="card-{{ zona.id }}" class="card">
                 <div class="card-content">
                     <span class="card-title flow-text"> {{ zona.nombre }} </span> 
                     <p class="col s3">Estado:
@@ -56,7 +61,7 @@
                             {% endif %}
                             </input>
                         </form>
-                        <form action="{% url 'del_zona' %}" class="col s4 center-align" method="post">
+                        <form class="form-eliminar col s4 center-align">
                         {% csrf_token %}
                             <input name="id" type="hidden" value="{{ zona.id }}" />
                             <button class="btn-flat" type="submit" value="ELIMINAR">
@@ -74,10 +79,34 @@
         </div>
     </div>
     {% endif %}
-    <div class="fixed-action-btn">
-        <a href="{% url 'new_zona' %}" class="btn-floating btn-large waves-effect waves-light red">
-             <i class="large material-icons">add</i>
-        </a>
+
+    {% if search %}
+        <div class="row">
+            <div class="col s12 center-align">
+                <a href="{% url 'zonas' %}" class="waves-effect waves-light btn"> Ver todas las Zonas </a>
+            </div>
+        </div>
+    {% else %}
+        <div class="fixed-action-btn">
+            <a href="{% url 'new_zona' %}" class="btn-floating btn-large waves-effect waves-light red">
+                <i class="large material-icons">add</i>
+            </a>
+        </div>
+    {% endif %}
+</div>
+<div id="zonaDelModal" class="modal">
+    <div class="modal-content center-align">
+        <h4>¿Quiere eliminar la zona?</h4>
+        <p></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn btn-flat"><span class="flow-text">No</span></a>
+        <a id="eliminar" class="modal-close waves-effect waves-green btn"><span class="flow-text">Sí</span></a>
     </div>
 </div>
+{% load static %}
+{% endblock %}
+{% block javascript %}
+<script src="{% static "scripts/zonas.js" %}">
+</script>
 {% endblock %}
