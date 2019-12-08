@@ -250,7 +250,7 @@ def search_zonas(req):
 @csrf_exempt
 def ajax_search_cliente(req):
     word = req.GET.get("word","")
-    clientes = Cliente.objects.exclude(estado = "*").filter(nombre__istartswith = word).select_related('zona','tipo')
+    clientes = Cliente.objects.exclude(estado = "*").filter(nombre__icontains = word).select_related('zona','tipo')
     data = {}
     for cliente in clientes:
         data[cliente.id] = {

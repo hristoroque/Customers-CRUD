@@ -87,9 +87,12 @@ $ ('#search-input').on('keyup',function(event){
                 completion[nombre] = null;
             })
 
-            console.log(completion)
-
             instance.updateData(completion)
+
+            $('.autocomplete-content').children().on("click",ev=>{
+                $('#search-input').val(ev.target.innerText)
+                $("#search-form").submit()
+            })
         },
         method: 'GET'
     })
