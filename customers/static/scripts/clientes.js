@@ -1,3 +1,8 @@
+$(document).ready(function(){
+    $('input.autocomplete').autocomplete({
+    });
+});
+
 $( ".activar" ).on("submit", function(event){
     event.preventDefault()
     var id = $(this).find("input[name='id']").val()
@@ -72,11 +77,25 @@ $ ('#search-input').on('keyup',function(event){
             'word': word,
         },
         success: function(data){
-            $('#search-list').html("")
+            let instance = M.Autocomplete.getInstance($("input.autocomplete"));
+
+            completion = {}
+
             Object.keys(data).forEach(id=>{
                 let nombre = data[id].nombre
-                $('#search-list').append(`<option value="${nombre}"></option>`)
+                completion[nombre] = null;
             })
+
+            console.log(completion)
+
+            instance.updateData(completion)
+            /*
+            Object.keys(data).forEach(id=>{
+                let nombre = data[id].nombre
+                instance.updateData({
+                    "nombre": null
+                })
+            })*/
         },
         method: 'GET'
     })

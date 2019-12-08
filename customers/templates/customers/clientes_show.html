@@ -9,20 +9,23 @@
                 Clientes
             {% endif %}
         </a>
-        <form id="search-form" action="{% url 'search_cliente' %}" method="get">
-            <div class="input-field">
-                <input list="search-list" name="word" id="search-input" type="search" autocomplete="off">
-                <label id="search-button" class="label-icon" for="search-input"><i class="material-icons">search</i></label>
-                <i id="search-close" class="material-icons">close</i>
-            </div>
-            <datalist id="search-list">
-            </datalist>
-        </form>
     </div>
 </nav>    
 <ul class="sidenav" id="sidenav-cliente">
     <li><a href=".."><i class="material-icons">arrow_back</i>Volver</a></li>
 </ul>
+<div class="row">
+    <div class="col s12">
+        <div class="row">
+            <form action="{% url 'search_cliente' %}" method="GET" autocomplete="off">
+            <div class="input-field col s12">
+                <i id="search-button" class="material-icons prefix">search</i>
+                <input name="word" type="text" id="search-input" class="autocomplete">
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
     <div class="container">
         {% if clientes %}
             <div id="cards-container">
