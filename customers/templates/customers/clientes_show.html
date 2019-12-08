@@ -85,10 +85,10 @@
                                 {% endif %}
                                 </input>
                             </form>
-                            <form  class="eliminar col s4 center-align" method="post">
+                            <form  class="form-eliminar col s4 center-align">
                             {% csrf_token %}
                                 <input name="id" type="hidden" value="{{ cliente.id }}" />
-                                <button class="btn-flat" type="submit" value="ELIMINAR">
+                                <button class="btn-flat modal-trigger" type="submit" value="ELIMINAR">
                                     ELIMINAR
                                 </button>
                             </form>
@@ -116,6 +116,18 @@
                 </a>
             </div>
         {% endif %}
+    </div>
+</div>
+
+<!-- Ventanas de confirmación para eliminar cliente -->
+<div id="clienteConf" class="modal">
+    <div class="modal-content">
+        <h4>¿Quiere eliminar el cliente?</h4>
+        <p></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn btn-flat"><span class="flow-text">No</span></a>
+        <a id="eliminar" class="modal-close waves-effect waves-green btn"><span class="flow-text">Sí</span></a>
     </div>
 </div>
 {% load static %}

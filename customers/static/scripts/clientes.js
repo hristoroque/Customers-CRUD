@@ -1,3 +1,7 @@
+$(document).ready(function(){
+    $('.modal').modal();
+  });
+
 $( ".activar" ).on("submit", function(event){
     event.preventDefault()
     var id = $(this).find("input[name='id']").val()
@@ -27,22 +31,33 @@ $( ".activar" ).on("submit", function(event){
         method: 'POST'
     });
 });
-$( ".eliminar" ).on( "submit", function( event ) {
+
+let id_eliminar;
+let card;
+
+$( "#eliminar" ).on('click', function(event){
+    $.ajax({
+        url: '/customers/ajax/clientes/del',
+        data: {
+        'id': id_eliminar
+        },
+        dataType: 'json',
+        success: function (data) {
+        if (data.is_deleted) {
+            card.remove()
+            M.toast({html: 'Cliente Eliminado'})
+        }
+        },
+        method: 'POST'
+    });
+})
+
+$( ".form-eliminar" ).on( "submit", function( event ) {
     event.preventDefault();
     var id = $(this).find("input[name='id']").val()
-    var cardid = "card-"+id
-    $.ajax({
-            url: '/customers/ajax/clientes/del',
-            data: {
-            'id': id
-            },
-            dataType: 'json',
-            success: function (data) {
-            if (data.is_deleted) {
-                $("#"+cardid).remove()
-                M.toast({html: 'Cliente Eliminado'})
-            }
-            },
-            method: 'POST'
-        });
+    var cardid = "#card-"+id
+    id_eliminar = id
+    card = $(cardid)
+    var instance = M.Modal.getInstance($("#clienteConf"));
+    instance.open();
 });

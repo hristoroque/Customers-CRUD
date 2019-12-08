@@ -160,6 +160,11 @@ def show_tipos(req):
     tipos = TipoCliente.objects.exclude(estado = "*").order_by('nombre')
     return render(req,"customers/tipos_show.html",{"tipos": tipos})
 
+def search_tipos(req):
+    word = req.GET.get("word","")
+    tipos = TipoCliente.objects.exclude(estado = "*").filter(nombre__contains = word).order_by('nombre')
+    return render(req,"customers/tipos_show.html",{"tipos": tipos})
+
 def toogle_zona(req):
     if(req.method=="POST"):
         id = req.POST['id']
@@ -203,5 +208,9 @@ def del_zona(req):
 
 def show_zonas(req):
     # zonas = Zona.objects.all()
+    zonas = Zona.objects.exclude(estado = "*").order_by('nombre')
+    return render(req,"customers/zonas_show.html",{"zonas": zonas})
+
+def search_zonas(req):
     zonas = Zona.objects.exclude(estado = "*").order_by('nombre')
     return render(req,"customers/zonas_show.html",{"zonas": zonas})
