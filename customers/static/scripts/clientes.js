@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    $('input.autocomplete').autocomplete({
-    });
+    $('input.autocomplete').autocomplete({});
+    $('.modal').modal();
 });
 
 $( ".activar" ).on("submit", function(event){
@@ -59,9 +59,10 @@ $( ".form-eliminar" ).on( "submit", function( event ) {
     var cardid = "#card-"+id
     id_eliminar = id
     card = $(cardid)
-    var instance = M.Modal.getInstance($("#clienteConf"));
+    let instance = M.Modal.getInstance($("#clienteConf"));
     instance.open();
 });
+
 $ ('#search-button').on('click',function(event){
     $('#search-input').focus()
 })
@@ -89,13 +90,6 @@ $ ('#search-input').on('keyup',function(event){
             console.log(completion)
 
             instance.updateData(completion)
-            /*
-            Object.keys(data).forEach(id=>{
-                let nombre = data[id].nombre
-                instance.updateData({
-                    "nombre": null
-                })
-            })*/
         },
         method: 'GET'
     })
