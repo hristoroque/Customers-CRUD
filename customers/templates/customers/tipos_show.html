@@ -37,15 +37,11 @@
             </form>
     </div>
 </nav>    
-<ul class="sidenav" id="sidenav-cliente">
-    <li> Ottras Cosas
-    </li>
-    <li><a href=".."><i class="material-icons">arrow_back</i>Volver</a></li>
-</ul>
 <div class="container">
     {% if tipos %}
     {% for tipo in tipos %}
-            <div class="card">
+
+            <div id="card-{{ tipo.id }}" class="card">
                 <div class="card-content green lighten-3">
                     <span class="card-title flow-text"> {{ tipo.nombre }} </span> 
                     <p class="col s3">Estado:
@@ -81,10 +77,10 @@
                             {% endif %}
                             </input>
                         </form>
-                        <form action="{% url 'del_tipo' %}" class="col s4 center-align" method="post">
+                        <form  class="form-eliminar col s4 center-align">
                         {% csrf_token %}
                             <input name="id" type="hidden" value="{{ tipo.id }}" />
-                            <button class="btn-flat" type="submit" value="ELIMINAR">
+                            <button class="btn-flat modal-trigger" type="submit" value="ELIMINAR">
                                     ELIMINAR
                             </button>
                         </form>
@@ -113,4 +109,20 @@
     </div>
     {% endif %}
 </div>
+<!-- Ventanas de confirmación para eliminar tipo -->
+<div id="tipoConf" class="modal">
+    <div class="modal-content center-align">
+        <h4>¿Quiere eliminar el tipo?</h4>
+        <p></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn btn-flat"><span class="flow-text">No</span></a>
+        <a id="eliminar" class="modal-close waves-effect waves-green btn"><span class="flow-text">Sí</span></a>
+    </div>
+</div>
+{% load static %}
+{% endblock %}
+{% block javascript %}
+<script src="{% static "scripts/tipos.js" %}">
+</script>
 {% endblock %}
