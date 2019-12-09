@@ -2,13 +2,13 @@
 {% load static %}
 {% block main %}
 <nav>
-    <ul id="slide-out" class="sidenav">
+    <ul id="slide-out" class="sidenav green lighten-4">
         <li><div class="user-view">
             <div class="background">
-                <img src="{% static 'images/background_sidenav.jpg' %}" width="100%">
+                <img src="{% static 'images/backgroundNav2.jpg' %}" width="100%">
             </div>
             <a><img class="circle" src="{% static 'images/launcher-icon-192x192.png' %}"></a>
-            <a><span class="white-text name">MIS CLIENTES</span></a>
+            <!-- <a><span class="white-text name">MIS CLIENTES</span></a> -->
             <br>
         </div></li>
         <li><a href="{% url 'index' %}">Mis Clientes</a></li>
@@ -20,7 +20,7 @@
         <li><a onclick="window.close();">Salir</a></li>
     </ul>
     <a data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
-    <div class="nav-wrapper">
+    <div class="nav-wrapper teal darken-4">
         <a href="#" class="brand-logo center">
             {% if search %}
                 Tipos Encontrados
@@ -46,7 +46,7 @@
     {% if tipos %}
     {% for tipo in tipos %}
             <div class="card">
-                <div class="card-content">
+                <div class="card-content green lighten-3">
                     <span class="card-title flow-text"> {{ tipo.nombre }} </span> 
                     <p class="col s3">Estado:
                         {% if tipo.estado == 'A' %}
@@ -56,7 +56,7 @@
                         {% endif %}
                     </p>
                 </div>
-                <div class="card-action">
+                <div class="card-action green lighten-4">
                     <div class="row">
                         <form action="{% url 'new_tipo' %}" method="get" class="col s4 center-align flow-text">
                             <input type="hidden" value="{{ tipo.id }}" name="id">
@@ -108,7 +108,7 @@
     {% else %}
     <div class="fixed-action-btn">
         <a href="{% url 'new_tipo' %}" class="btn-floating btn-large waves-effect waves-light red">
-             <i class="large material-icons">add</i>
+             <i class="large material-icons teal darken-4">add</i>
         </a>
     </div>
     {% endif %}
