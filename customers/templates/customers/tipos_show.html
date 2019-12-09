@@ -1,6 +1,25 @@
 {% extends "customers/base.html" %}
+{% load static %}
 {% block main %}
 <nav>
+    <ul id="slide-out" class="sidenav">
+        <li><div class="user-view">
+            <div class="background">
+                <img src="{% static 'images/background_sidenav.jpg' %}" width="100%">
+            </div>
+            <a><img class="circle" src="{% static 'images/launcher-icon-192x192.png' %}"></a>
+            <a><span class="white-text name">MIS CLIENTES</span></a>
+            <br>
+        </div></li>
+        <li><a href="{% url 'index' %}">Mis Clientes</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="waves-effect" href="{% url 'clientes' %}"><i class="material-icons">contacts</i>Clientes</a></li>
+        <li><a class="subheader" href="{% url 'tipos' %}"><i class="material-icons">group</i>Tipos</a></li>
+        <li><a class="waves-effect" href="{% url 'zonas' %}"><i class="material-icons">map</i>Zonas</a></li>
+        <li><div class="divider"></div></li>
+        <li><a onclick="window.close();">Salir</a></li>
+    </ul>
+    <a data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
     <div class="nav-wrapper">
         <a href="#" class="brand-logo center">
             {% if search %}
