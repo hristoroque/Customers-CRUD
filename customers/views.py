@@ -260,3 +260,23 @@ def ajax_search_cliente(req):
             "tipo": cliente.tipo.nombre
          }
     return JsonResponse(data)
+
+def ajax_search_zonas(req):
+    word = req.GET.get("word","")
+    zonas = Zona.objects.exclude(estado = "*").filter(nombre__icontains = word)
+    data = {}
+    for zona in zonas:
+        data[zona.id] = {
+            "nombre": zona.nombre,
+         }
+    return JsonResponse(data)
+
+def ajax_search_tipos(req):
+    word = req.GET.get("word","")
+    tipos = TipoCliente.objects.exclude(estado = "*").filter(nombre__icontains = word)
+    data = {}
+    for tipo in tipos:
+        data[tipo.id] = {
+            "nombre": tipo.nombre,
+        }
+    return JsonResponse(data)

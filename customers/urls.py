@@ -25,4 +25,6 @@ urlpatterns = [
     path('ajax/zonas/del',views.ajax_del_zona,name="ajax_del_zona"),
     path('ajax/tipos/del',views.ajax_del_tipo,name="ajax_del_tipo"),
     path('ajax/search',views.ajax_search_cliente,name="ajax_search_cliente"),
+    path('ajax/search/zona',views.ajax_search_zonas,name="ajax_search_zonas"),
+    path('ajax/search/tipo',views.ajax_search_tipos,name="ajax_search_tipos"),
 ]
